@@ -10,8 +10,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
+    getLocation();
+  }
+
+  void getLocation() async {
     Location location = Location();
-    location.getLocation();
+    await location.getCurrLocation();
+    print(location.longitude);
+    print(location.latitude);
   }
 
   @override
