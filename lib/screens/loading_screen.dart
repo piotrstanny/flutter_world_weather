@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_world_weather/services/location.dart';
 import 'package:flutter_world_weather/services/networking.dart';
 import 'package:flutter_world_weather/screens/location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 const apiKey = '8b0df20c8c430b8a6438b99191799ea1';
 
@@ -31,8 +32,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     var weatherData = await networkHelper.getData();
 
-    print('whhaaat');
-
     Navigator.push(context, MaterialPageRoute(
       builder: (context) {
         return LocationScreen();
@@ -43,8 +42,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(longitude.toString()),
+      body: SpinKitFadingCircle(
+        color: Colors.white,
+        size: 90.0,
       ),
     );
   }
