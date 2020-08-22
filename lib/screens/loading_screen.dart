@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_world_weather/services/location.dart';
 import 'package:flutter_world_weather/services/networking.dart';
+import 'package:flutter_world_weather/screens/location_screen.dart';
 
 const apiKey = '8b0df20c8c430b8a6438b99191799ea1';
 
@@ -16,6 +17,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     super.initState();
     getLocationData();
+    print('init state happened');
   }
 
   void getLocationData() async {
@@ -28,13 +30,21 @@ class _LoadingScreenState extends State<LoadingScreen> {
         'http://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
 
     var weatherData = await networkHelper.getData();
+
+    print('whhaaat');
+
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) {
+        return LocationScreen();
+      },
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Your position is:'),
+        child: Text(longitude.toString()),
       ),
     );
   }
