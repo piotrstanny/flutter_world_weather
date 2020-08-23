@@ -10,7 +10,7 @@ const kMessageTextStyle = TextStyle(
 );
 
 const kButtonTextStyle = TextStyle(
-  fontSize: 30.0,
+  fontSize: 40.0,
   fontFamily: 'Bebas Neue',
 );
 
