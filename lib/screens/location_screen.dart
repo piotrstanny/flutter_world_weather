@@ -90,7 +90,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
                   "$weatherMsg in $cityName!",
-                  textAlign: TextAlign.right,
+                  textAlign: TextAlign.center,
                   style: kMessageTextStyle,
                 ),
               ),
