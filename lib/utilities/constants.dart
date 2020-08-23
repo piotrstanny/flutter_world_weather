@@ -15,7 +15,7 @@ const kButtonTextStyle = TextStyle(
 );
 
 const kConditionTextStyle = TextStyle(
-  fontSize: 60.0,
+  fontSize: 45.0,
   fontFamily: 'Bebas Neue',
 );
 
@@ -29,7 +29,7 @@ const kTextFieldInputDecoration = InputDecoration(
   icon: Icon(
     Icons.location_city,
     color: Colors.white,
-    size: 30.0,
+    size: 40.0,
   ),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(
