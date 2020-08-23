@@ -4,6 +4,14 @@ import 'package:flutter_world_weather/services/networking.dart';
 const apiKey = '8b0df20c8c430b8a6438b99191799ea1';
 
 class WeatherModel {
+  Future<dynamic> getCityWeather(String typedName) async {
+    NetworkHelper networkHelper = NetworkHelper(
+        'http://api.openweathermap.org/data/2.5/weather?q=$typedName&appid=$apiKey&units=metric');
+
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   Future<dynamic> getLocationWeather() async {
     Location location = Location();
     await location.getCurrLocation();
@@ -27,7 +35,7 @@ class WeatherModel {
     } else if (condition < 800) {
       return '🌫\nMist';
     } else if (condition == 800) {
-      return '☀/nSun';
+      return '☀\nSun';
     } else if (condition <= 804) {
       return '☁\nClouds';
     } else {
