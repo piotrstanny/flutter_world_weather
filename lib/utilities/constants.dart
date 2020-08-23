@@ -10,11 +10,31 @@ const kMessageTextStyle = TextStyle(
 );
 
 const kButtonTextStyle = TextStyle(
-  fontSize: 30.0,
+  fontSize: 40.0,
   fontFamily: 'Bebas Neue',
 );
 
 const kConditionTextStyle = TextStyle(
-  fontSize: 90.0,
+  fontSize: 60.0,
   fontFamily: 'Bebas Neue',
+);
+
+const kTextFieldInputDecoration = InputDecoration(
+  hintText: 'Enter City Name',
+  hintStyle: TextStyle(
+    color: Colors.blueGrey,
+  ),
+  filled: true,
+  fillColor: Colors.white,
+  icon: Icon(
+    Icons.location_city,
+    color: Colors.white,
+    size: 30.0,
+  ),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(10.0),
+    ),
+    borderSide: BorderSide.none,
+  ),
 );
