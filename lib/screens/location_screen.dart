@@ -13,7 +13,7 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel();
-  int temperature;
+  dynamic temperature;
   String weatherMsg;
   String weatherIcon;
   String cityName;
@@ -30,11 +30,11 @@ class _LocationScreenState extends State<LocationScreen> {
       if (weatherData == null) {
         temperature = 0;
         weatherIcon = 'Error';
-        weatherMsg = 'Unable to get the location data';
+        weatherMsg = 'Unable to read the location';
         cityName = '';
         return;
       }
-      double temp = weatherData['main']['temp'];
+      dynamic temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       var condition = weatherData['weather'][0]['id'];
       weatherIcon = weather.getWeatherIcon(condition);
@@ -65,8 +65,8 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                    onPressed: () {
-                      var weatherData = weather.getLocationWeather();
+                    onPressed: () async {
+                      var weatherData = await weather.getLocationWeather();
                       updateUi(weatherData);
                     },
                     child: Icon(
