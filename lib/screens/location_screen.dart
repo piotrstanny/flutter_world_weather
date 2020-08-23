@@ -1,12 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_world_weather/utilities/constants.dart';
+import 'package:flutter_world_weather/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
+  LocationScreen({this.locationWeather});
+  final locationWeather;
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  WeatherModel weather = WeatherModel();
+  int temperature;
+  String weatherMsg;
+  String weatherIcon;
+  String cityName;
+
+  @override
+  void initState() {
+    super.initState();
+
+    updateUi(widget.locationWeather);
+  }
+
+  void updateUi(var weatherData) {
+    setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        weatherMsg = 'Unable to get the location data';
+        cityName = '';
+        return;
+      }
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+      var condition = weatherData['weather'][0]['id'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      cityName = weatherData['name'];
+      weatherMsg = weather.getMessage(temperature);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +64,10 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      var weatherData = weather.getLocationWeather();
+                      updateUi(weatherData);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
@@ -47,14 +85,19 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(left: 15.0),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      '32°',
+                      '$temperature°',
                       style: kTempTextStyle,
                     ),
-                    Text(
-                      '☀️',
-                      style: kConditionTextStyle,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Text(
+                        weatherIcon,
+                        textAlign: TextAlign.center,
+                        style: kConditionTextStyle,
+                      ),
                     ),
                   ],
                 ),
@@ -62,8 +105,8 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
-                  textAlign: TextAlign.right,
+                  "$weatherMsg in $cityName!",
+                  textAlign: TextAlign.center,
                   style: kMessageTextStyle,
                 ),
               ),
@@ -74,7 +117,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-
-//double temperature = decodedData['main']['temp'];
-//int condition = decodedData['weather'][0]['id'];
-//String cityName = decodedData['name'];
