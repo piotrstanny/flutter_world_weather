@@ -1,19 +1,19 @@
 class WeatherModel {
   String getWeatherIcon(int condition) {
     if (condition < 300) {
-      return '🌩';
+      return '🌩\nThunderstorm';
     } else if (condition < 400) {
-      return '🌧';
+      return '🌧\nHeavy rain';
     } else if (condition < 600) {
-      return '☔️';
+      return '☔️\nShowers';
     } else if (condition < 700) {
-      return '☃️';
+      return '☃️\nSnowing';
     } else if (condition < 800) {
-      return '🌫';
+      return '🌫\nMist';
     } else if (condition == 800) {
-      return '☀️';
+      return '☀/nSunny️';
     } else if (condition <= 804) {
-      return '☁️';
+      return '☁\nCloudy️';
     } else {
       return '🤷‍';
     }

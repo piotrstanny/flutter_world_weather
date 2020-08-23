@@ -13,7 +13,8 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel();
   int temperature;
-  int condition;
+  String weatherMsg;
+  String weatherIcon;
   String cityName;
 
   @override
@@ -26,10 +27,10 @@ class _LocationScreenState extends State<LocationScreen> {
   void updateUi(dynamic weatherData) {
     double temp = weatherData['main']['temp'];
     temperature = temp.toInt();
-    condition = weatherData['weather'][0]['id'];
+    dynamic condition = weatherData['weather'][0]['id'];
+    weatherIcon = weather.getWeatherIcon(condition);
     cityName = weatherData['name'];
-    weather.getWeatherIcon(condition);
-    weather.getMessage(temperature);
+    weatherMsg = weather.getMessage(temperature);
   }
 
   @override
@@ -71,14 +72,15 @@ class _LocationScreenState extends State<LocationScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15.0),
-                child: Row(
+                child: Column(
                   children: <Widget>[
                     Text(
                       '$temperature°',
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      weatherIcon,
+                      textAlign: TextAlign.center,
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -87,7 +89,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in $cityName!",
+                  "$weatherMsg in $cityName!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
