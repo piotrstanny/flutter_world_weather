@@ -27,9 +27,9 @@ class WeatherModel {
     } else if (condition < 800) {
       return '🌫\nMist';
     } else if (condition == 800) {
-      return '☀/nSunny️';
+      return '☀/nSun';
     } else if (condition <= 804) {
-      return '☁\nCloudy️';
+      return '☁\nClouds';
     } else {
       return '🤷‍';
     }
