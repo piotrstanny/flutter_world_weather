@@ -1,6 +1,10 @@
 # flutter_world_weather
 
-A new Flutter application.
+Flutter Mobile App - using API to check the weather of your current location or any other place on earth.
+- Using device location services,
+- Using API of https://openweathermap.org/
+
+![Flutter Weather App Demo](https://media.giphy.com/media/RKNHo5rLB3NbIb39kd/giphy.gif)
 
 ## Getting Started
 
